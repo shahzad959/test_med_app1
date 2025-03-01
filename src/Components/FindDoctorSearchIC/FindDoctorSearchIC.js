@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './FindDoctorSearchIC.css';
 import { useNavigate, Navigate } from 'react-router-dom';
 
 

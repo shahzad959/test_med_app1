@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import './DoctorCardIC.css';
+
 
 
 const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => {
