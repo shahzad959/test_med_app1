@@ -53,6 +53,9 @@
     align-items: center;
     gap: 0px;
 }
+.landing-container {
+    padding: 20px;
+  }
 
 
 
