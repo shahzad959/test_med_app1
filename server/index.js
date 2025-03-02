@@ -1,15 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const http = require('http');
 const connectToMongo = require('./db');
+const path = require('path');
+
 const app = express();
-
-
-app.set('view engine','ejs')
-app.use(express.static('public'))
-
 const PORT = process.env.PORT || 8181;
-
 
 // Middleware
 app.use(express.json());
@@ -21,13 +16,21 @@ connectToMongo();
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Catch-all route to serve index.html for SPAs
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
-
-  // Start the server
+// Start the server
 app.listen(PORT, () => {
-console.log(`Server is running on port http://localhost:${PORT}`);
+  console.log(`Server is running on port http://localhost:${PORT}`);
 });
